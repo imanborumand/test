@@ -1,8 +1,11 @@
 <?php namespace App\Http\Controllers\Api;
 
 
+use App\Exceptions\CustomQueryErrorException;
+use App\Exceptions\CustomValidationException;
 use App\Http\Controllers\Controller;
 use App\Services\TransactionService;
+
 
 class TransactionController extends Controller
 {
@@ -16,12 +19,6 @@ class TransactionController extends Controller
     {
 
         $this->service = $transactionService;
-    }
-
-
-    public function all()
-    {
-        return '1';
     }
 
 
