@@ -15,9 +15,9 @@ class Webservices extends Migration
     {
         Schema::create('webservices', function (Blueprint $table) {
             $table->id();
-            $table->integer('name');
+            $table->string('name');
             $table->timestamps();
-        });        
+        });
     }
 
     /**
