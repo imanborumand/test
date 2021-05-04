@@ -1,7 +1,11 @@
 FROM php:8-fpm-alpine as php
 
-RUN apk add --no-cache libsodium-dev
+RUN apk add --no-cache libsodium-dev\
+    postgresql-dev
+
 RUN docker-php-ext-install sodium pcntl
+RUN docker-php-ext-install pdo pdo_pgsql
+
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
