@@ -17,7 +17,7 @@ class Transactions extends Migration
             $table->id();
             $table->unsignedBigInteger('webservice_id');
             $table->foreign('webservice_id')->references('id')->on('webservices')->onDelete('cascade');
-            $table->decimal('amount', 9, 3)->index();
+            $table->integer('amount')->index();
             $table->enum('type', TRANSACTION_TYPES)->default(TRANSACTION_TYPES[0])->index();//0:web,1:mobile,2:pos
             $table->timestamps();
         });
