@@ -13,4 +13,5 @@ abstract class RepositoryBase
     protected $model = null;
 
 
+    protected int $customPaginateNumber = 20;
 }
