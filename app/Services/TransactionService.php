@@ -1,6 +1,7 @@
 <?php namespace App\Services;
 
 
+use App\Exceptions\CustomQueryErrorException;
 use App\Repositories\TransactionRepository;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -28,6 +29,18 @@ class TransactionService extends ServiceBase
        return $this->repository->getTransactionsByTypeAndAmount($params['type'], $params['amount']);
     }
 
+
+    /**
+     * @return array
+     * @throws CustomQueryErrorException
+     */
+    public function statistics() : array
+    {
+        return [
+            'transactions' => $this->repository->transactionStatistics(),
+            'summary' => $this->repository->summaryTransactions()
+        ];
+    }
 
 
 

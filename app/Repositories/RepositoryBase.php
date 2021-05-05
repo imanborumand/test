@@ -4,13 +4,16 @@
  * base repository
  * other repository extend from this class
  */
+
+use Illuminate\Database\Eloquent\Model;
+
 abstract class RepositoryBase
 {
 
     /**
-     * @var null
+     * @var Model|null
      */
-    protected $model = null;
+    protected ?Model $model = null;
 
 
     protected int $customPaginateNumber = 20;

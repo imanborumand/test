@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers\Api;
 
 
+use App\Exceptions\CustomQueryErrorException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\GetTransactionsRequest;
 use App\Services\TransactionService;
@@ -21,10 +22,27 @@ class TransactionController extends Controller
     }
 
 
-    public function getTransactions(GetTransactionsRequest  $request) : JsonResponse
+    /**
+     * return transactions by type and amount
+     * @param GetTransactionsRequest $request
+     * @return JsonResponse
+     */
+    public function getTransactions( GetTransactionsRequest  $request) : JsonResponse
     {
         return $this->successResponse()
                     ->setData($this->service->getTransactions($request->validated()))
+                    ->response();
+    }
+
+
+    /**
+     * @return JsonResponse
+     * @throws CustomQueryErrorException
+     */
+    public function statistics() : JsonResponse
+    {
+        return $this->successResponse()
+                    ->setData($this->service->statistics())
                     ->response();
     }
 

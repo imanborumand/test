@@ -47,10 +47,51 @@ trait ApiResponseTrait
 
     public function setData($data = [])
     {
+
+        /*
+         * check if data is object change to array and check for isset paginate
+         * remove default laravel paginate key and create customize paginate
+         */
+        if (! is_array($data)) {
+
+            $dataArray = collect($data)->toArray();
+            if (isset($dataArray['current_page'])) {
+                $this->paginate = [
+                    'total' => $dataArray['total'],
+                    'per_page' => $dataArray['per_page'],
+                    'current_page' => $dataArray['current_page'],
+                    'next_page_url' => $dataArray['next_page_url'],
+                    'last_page_url' => $dataArray['last_page_url'],
+                    'prev_page_url' => $dataArray['prev_page_url'],
+                    'first_page_url' => $dataArray['first_page_url'],
+                    'last_page' => $dataArray['last_page'],
+
+                ];
+                //remove default laravel paginate key and merge new paginate
+                $data = array_merge([], array_diff_key($dataArray, array_fill_keys([
+                    'current_page',
+                    'first_page_url',
+                    'from',
+                    'last_page',
+                    'last_page_url',
+                    'next_page_url',
+                    'path',
+                    'per_page',
+                    'prev_page_url',
+                    'to',
+                    'total'
+               ], null)));
+                $data = $data['data'];
+            }
+        }
+
+
+        $this->data = $data;
         return $this;
     }
 
-	/**
+
+    /**
 	 * @return array
 	 */
 	public function getData()

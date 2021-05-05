@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\ServiceBase;
 use App\Traits\ApiResponseTrait;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -12,5 +13,5 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests, ApiResponseTrait;
 
-    protected $service = null;
+    protected ?ServiceBase  $service = null;
 }
